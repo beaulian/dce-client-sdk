@@ -1,12 +1,11 @@
 # coding=utf-8
 import six
 import urllib3
+import requests
 from functools import partial
 from semantic_version import Version
 from requests.auth import HTTPBasicAuth
 from cached_property import cached_property
-
-import requests
 
 from .compat import (
     quote_plus, urlparse
