@@ -6,3 +6,7 @@ from .utils.utils import (
 from .utils.decorators import (
     maximum_version, minimum_version
 )
+from .errors import (
+    NotFound, NullResource,
+    NotAuthorizedError
+)

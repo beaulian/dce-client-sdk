@@ -14,7 +14,7 @@ class AccessKeyApiMixin:
     def create_access_key_pair(self):
         url = '/access-keys'
 
-        return self._result(self._post(self._url(url)), json=True)
+        return self._result(self._post(self._url(url)))
 
     def delete_access_key_pair(self, access_key):
         url = '/access-keys/{0}'.format(access_key)
@@ -156,11 +156,7 @@ class AccountApiMixin(AccessKeyApiMixin,
         )
 
     def create_account(self, name=None, email=None, password=None, is_admin='False'):
-        if not is_valid_bool_str(is_admin):
-            raise ValueError(
-                "'is_admin' got a unexpected value, "
-                "expected 'yes', '1', 'true', 't', 'no', '0', 'false', 'f'"
-            )
+        check_bool_str(is_admin=is_admin)
 
         url = '/accounts'
         data = camelize_dict({
@@ -255,4 +251,4 @@ class AccountApiMixin(AccessKeyApiMixin,
         return self._result(self._get(self._url(url)))
 
 
-wrapper_check_resource(AccessKeyApiMixin)
+wrapper_check_resource(AccountApiMixin)
