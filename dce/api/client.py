@@ -19,15 +19,19 @@ from ..errors import (
     InvalidVersion, create_api_error_from_http_exception
 )
 from ..utils.decorators import minimum_version
-from .registry import RegistryApiMixin
 from .advance import AdvancedMethodMixin
+from .registry import RegistryApiMixin
+from .account import AccountApiMixin
+from .plugin import PluginApiMixin
 
 urllib3.disable_warnings()
 
 
 class APIClient(requests.Session,
                 AdvancedMethodMixin,
-                RegistryApiMixin):
+                RegistryApiMixin,
+                AccountApiMixin,
+                PluginApiMixin):
     def __init__(self, base_url=None, username=None, password=None,
                  token=None, timeout=DEFAULT_TIMEOUT_SECONDS,
                  user_agent=DEFAULT_USER_AGENT):
