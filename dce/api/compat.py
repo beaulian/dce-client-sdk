@@ -7,11 +7,7 @@ Python 3.
 '''
 
 _ver = sys.version_info
-
-#: Python 2.x?
 is_PY2 = (_ver[0] == 2)
-
-#: Python 3.x?
 is_PY3 = (_ver[0] == 3)
 
 

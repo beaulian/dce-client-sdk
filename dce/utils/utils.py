@@ -7,8 +7,8 @@ from inflection import camelize
 from itsdangerous import JSONWebSignatureSerializer
 from itsdangerous import TimedJSONWebSignatureSerializer
 
-true_bool_str = ('yes', 'true', 't', '1')
-false_bool_str = ('no', 'false', 'f', '0')
+true_bool_str = {'yes', 'true', 't', '1'}
+false_bool_str = {'no', 'false', 'f', '0'}
 
 
 def str2bool(v, default):
@@ -88,7 +88,7 @@ def memoize_in_object(fn):
     return _memoize
 
 
-def wrapper_check_resource(cls):
+def wrap_checking_resource(cls):
     from .decorators import check_resource
 
     attrs = cls.__dict__

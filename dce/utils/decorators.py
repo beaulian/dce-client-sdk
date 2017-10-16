@@ -9,8 +9,9 @@ def check_resource(*resource_names):
     def decorator(f):
         @functools.wraps(f)
         def wrapped(self, *args, **kwargs):
+            ags = list(args)
             for resource_name in resource_names:
-                resource_id = kwargs.get(resource_name, None)
+                resource_id = ags.pop()
                 if isinstance(resource_id, dict):
                     resource_id = resource_id.get('Id', resource_id.get('ID'))
                 if not resource_id:
@@ -19,7 +20,7 @@ def check_resource(*resource_names):
                             resource_name, resource_id
                         )
                     )
-            return f(self, resource_id, *args, **kwargs)
+            return f(self, *args, **kwargs)
         return wrapped
     return decorator
 
