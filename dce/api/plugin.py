@@ -6,7 +6,25 @@ from ..utils import (
 )
 
 
-class PluginApiMixin:
+class ExtensionApiMixin:
+    def list_extension(self, extension_point):
+        """
+        Read extension point of plugin.
+
+        :param extension_point: the name of extension_point,
+                                including `plugin-setting`, `manage-views`,
+                                `action-sets`, `navigator`.
+
+        :return: a list of dicts, one per extension.
+
+        :raise APIError: if server returns an error.
+        """
+        url = '/extensions/{0}'.format(extension_point)
+
+        return self._result(self._get(self._url(url)), json=True)
+
+
+class PluginApiMixin(ExtensionApiMixin):
     def list_plugin(self, categories=None, is_enabled='False',
                     builtin_only='False', iter=False, limit=None):
         """
